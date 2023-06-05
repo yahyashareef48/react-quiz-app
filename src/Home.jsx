@@ -9,7 +9,7 @@ export default function Home() {
   });
 
   const handleChange = (e) => {
-    setFormData((oldFormData) => ({...oldFormData, [e.target.name]: e.target.value}));
+    setFormData((oldFormData) => ({ ...oldFormData, [e.target.name]: e.target.value }));
   };
   console.log(formData);
 
@@ -29,9 +29,7 @@ export default function Home() {
             className="w-full"
           >
             <option value="easy">Easy</option>
-            <option value="medium" selected>
-              Medium
-            </option>
+            <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
         </div>
