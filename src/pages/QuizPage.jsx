@@ -52,6 +52,16 @@ export default function QuizPage() {
     });
     // Scroll to the top of the page
     window.scrollTo(0, 0);
+
+    // localStorage
+    let localStorageArr = JSON.parse(localStorage.getItem("score"));
+    localStorageArr.push({
+      score: submitState.score,
+      time: new Date(),
+      difficulty: state.formData.difficulty,
+    });
+    localStorageArr = JSON.stringify(localStorageArr);
+    localStorage.setItem("score", localStorageArr)
   };
 
   // Generate Quiz components using quizData
