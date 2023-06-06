@@ -16,15 +16,6 @@ export default function QuizPage() {
     submitted: false,
   }); // Holds the score and submission state
 
-  // Function to handle user answers
-  const handleAns = (index, value) => {
-    setAns((oldAns) => {
-      // Update the user's answer at the specified index
-      oldAns[index] = value;
-      return oldAns;
-    });
-  };
-
   // Construct the URL for API request based on the form data
   const url = `https://opentdb.com/api.php?amount=10&${
     state.formData.category !== "any" ? "category=&" : ""
@@ -36,6 +27,32 @@ export default function QuizPage() {
       .then((res) => res.json())
       .then((data) => setQuizData(data.results));
   }, []);
+
+  // Function to handle user answers
+  const handleAns = (index, value) => {
+    setAns((oldAns) => {
+      // Update the user's answer at the specified index
+      oldAns[index] = value;
+      return oldAns;
+    });
+  };
+
+  // Submit button function
+  const handleSubmitBtn = (e) => {
+    e.preventDefault();
+    // Calculate the game score based on correct answers
+    let gameScore = 0;
+    ans.map((a, i) => {
+      quizData[i].correct_answer === a && gameScore++;
+    });
+    // Update the submission state and score
+    setSubmitState({
+      score: gameScore,
+      submitted: true,
+    });
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);
+  };
 
   // Generate Quiz components using quizData
   const quizElements = quizData.map((data, index) => (
@@ -58,25 +75,7 @@ export default function QuizPage() {
 
       {/* Submit button */}
       {!submitState.submitted ? (
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            // Calculate the game score based on correct answers
-            let gameScore = 0;
-            ans.map((a, i) => {
-              quizData[i].correct_answer === a && gameScore++;
-            });
-            // Update the submission state and score
-            setSubmitState({
-              score: gameScore,
-              submitted: true,
-            });
-            // Scroll to the top of the page
-            window.scrollTo(0, 0);
-          }}
-        >
-          Submit
-        </button>
+        <button onClick={handleSubmitBtn}>Submit</button>
       ) : (
         <button onClick={() => navigate("/", { replace: true })}>Play Again</button>
       )}
