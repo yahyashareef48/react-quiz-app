@@ -36,7 +36,11 @@ export default function QuizPage() {
       <button
         onClick={(e) => {
           e.preventDefault();
-          
+          let gameScore = 0;
+          ans.map((a, i) => {
+            quizData[i].correct_answer === a && gameScore++;
+          });
+          console.log(gameScore);
         }}
       >
         Submit
