@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Quiz from "../components/Quiz";
 
 export default function QuizPage() {
   const { state } = useLocation();
+  const navigate = useNavigate()
+
   const [quizData, setQuizData] = useState([]);
   const [ans, setAns] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [submitState, setSubmitState] = useState({
@@ -50,7 +52,7 @@ export default function QuizPage() {
       <div className="grid gap-4">{quizData.length !== 0 && quizElements}</div>
 
       {/* Submit button */}
-      {!submitState.submitted && (
+      {!submitState.submitted ? (
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -67,6 +69,10 @@ export default function QuizPage() {
           }}
         >
           Submit
+        </button>
+      ) : (
+        <button onClick={() => navigate("/", { replace: true })}>
+          play again
         </button>
       )}
     </>
