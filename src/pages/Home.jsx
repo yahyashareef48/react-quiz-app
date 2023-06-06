@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 export default function Home() {
   // State to manage form data
   const [formData, setFormData] = useState({
-    difficulty: "medium",
+    difficulty: "easy",
     category: "any",
-    type: "multiple",
+    type: "boolean",
   });
 
   // Handle form input changes

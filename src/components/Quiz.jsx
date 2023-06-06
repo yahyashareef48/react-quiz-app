@@ -1,5 +1,5 @@
-import he from "he";
-import { v4 as uuidv4 } from "uuid";
+import he from "he"; // Import the "he" library for HTML entity decoding
+import { v4 as uuidv4 } from "uuid"; // Import the uuidv4 function for generating unique keys
 
 export default function Quiz({ props, handleAns, num, submitted }) {
   let options = [props.correct_answer, ...props.incorrect_answers];
