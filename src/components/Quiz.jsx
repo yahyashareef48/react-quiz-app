@@ -3,10 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function Quiz({ props, handleAns, num }) {
   let options = [props.correct_answer, ...props.incorrect_answers];
-  console.log(options);
+
+  // Sort options based on the question type
   options =
     props.type === "multiple" ? options.sort(() => Math.random() - 0.5) : options.sort().reverse();
 
+  // Generate buttons for each option
   let btn = options.map((ans) => (
     <button
       onClick={(e) => {
@@ -21,7 +23,10 @@ export default function Quiz({ props, handleAns, num }) {
 
   return (
     <div>
+      {/* Render the question */}
       <h3>{he.decode(props.question)}</h3>
+
+      {/* Render the answer options */}
       <div className="grid gap-4">{btn}</div>
     </div>
   );

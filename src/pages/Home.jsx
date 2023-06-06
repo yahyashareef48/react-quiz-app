@@ -2,23 +2,21 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
+  // State to manage form data
   const [formData, setFormData] = useState({
     difficulty: "medium",
     category: "any",
     type: "multiple",
   });
 
+  // Handle form input changes
   const handleChange = (e) => {
     setFormData((oldFormData) => ({ ...oldFormData, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
-    console.log(e);
-  };
-
   return (
     <main className="min-h-screen  grid place-items-center">
-      <form onSubmit={handleSubmit} action="/" className="grid grid-rows-1 max-w-xs gap-4">
+      <form action="/" className="grid grid-rows-1 max-w-xs gap-4">
         <div>
           <label htmlFor="difficulty">Difficulty</label>
           <select
@@ -78,10 +76,8 @@ export default function Home() {
           </select>
         </div>
 
-        <Link to="/quiz" state={{formData}} className="w-full">
-          <button
-            className="p-4 bg-[#00000089] rounded-xl font-bold w-full"
-          >
+        <Link to="/quiz" state={{ formData }} className="w-full">
+          <button className="p-4 bg-[#00000089] rounded-xl font-bold w-full">
             Test Your Knowledge
           </button>
         </Link>
