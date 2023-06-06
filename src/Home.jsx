@@ -11,7 +11,6 @@ export default function Home() {
   const handleChange = (e) => {
     setFormData((oldFormData) => ({ ...oldFormData, [e.target.name]: e.target.value }));
   };
-  console.log(formData);
 
   const handleSubmit = (e) => {
     console.log(e);
@@ -79,12 +78,13 @@ export default function Home() {
           </select>
         </div>
 
-        <button
-          onClick={(e) => e.preventDefault()}
-          className="p-4 bg-[#00000089] rounded-xl font-bold"
-        >
-          Test Your Knowledge
-        </button>
+        <Link to="/quiz" state={{formData}} className="w-full">
+          <button
+            className="p-4 bg-[#00000089] rounded-xl font-bold w-full"
+          >
+            Test Your Knowledge
+          </button>
+        </Link>
       </form>
     </main>
   );
