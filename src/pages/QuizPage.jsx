@@ -7,6 +7,10 @@ export default function QuizPage() {
   const { state } = useLocation();
   const [quizData, setQuizData] = useState([]);
   const [ans, setAns] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [submitState, setSubmitState] = useState({
+    score: 0,
+    submitted: false,
+  });
 
   // Function to handle user answers
   const handleAns = (index, value) => {
@@ -30,30 +34,41 @@ export default function QuizPage() {
 
   // Generate Quiz components using quizData
   const quizElements = quizData.map((data, index) => (
-    <Quiz key={uuidv4()} props={data} num={index} handleAns={handleAns} />
+    <Quiz
+      key={uuidv4()}
+      props={data}
+      submitted={submitState.submitted}
+      num={index}
+      handleAns={handleAns}
+    />
   ));
 
   return (
     <>
+      {submitState.submitted && <div>{submitState.score}</div>}
       {/* Render the Quiz components */}
       <div className="grid gap-4">{quizData.length !== 0 && quizElements}</div>
 
       {/* Submit button */}
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-
-          // Calculate game score
-          let gameScore = 0;
-          ans.map((a, i) => {
-            quizData[i].correct_answer === a && gameScore++;
-          });
-
-          console.log(gameScore);
-        }}
-      >
-        Submit
-      </button>
+      {!submitState.submitted && (
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            // Calculate game score
+            let gameScore = 0;
+            ans.map((a, i) => {
+              quizData[i].correct_answer === a && gameScore++;
+            });
+            setSubmitState({
+              score: gameScore,
+              submitted: true,
+            });
+            window.scrollTo(0, 0);
+          }}
+        >
+          Submit
+        </button>
+      )}
     </>
   );
 }

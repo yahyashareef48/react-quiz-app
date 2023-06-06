@@ -1,7 +1,7 @@
 import he from "he";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Quiz({ props, handleAns, num }) {
+export default function Quiz({ props, handleAns, num, submitted }) {
   let options = [props.correct_answer, ...props.incorrect_answers];
 
   // Sort options based on the question type
@@ -9,17 +9,18 @@ export default function Quiz({ props, handleAns, num }) {
     props.type === "multiple" ? options.sort(() => Math.random() - 0.5) : options.sort().reverse();
 
   // Generate buttons for each option
-  let btn = options.map((ans) => (
-    <button
-      onClick={(e) => {
-        e.preventDefault();
-        handleAns(num, ans);
-      }}
-      key={uuidv4()}
-    >
-      {he.decode(ans)}
-    </button>
-  ));
+  let btn = options.map((ans) => {
+    let handleClick = (e) => {
+      e.preventDefault();
+      !submitted && handleAns(num, ans);
+    };
+
+    return (
+      <button onClick={handleClick} key={uuidv4()}>
+        {he.decode(ans)}
+      </button>
+    );
+  });
 
   return (
     <div>
