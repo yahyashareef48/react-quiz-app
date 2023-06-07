@@ -19,7 +19,9 @@ export default function QuizPage() {
   // Construct the URL for API request based on the form data
   const url = `https://opentdb.com/api.php?amount=10&${
     state.formData.category !== "any" ? "category=&" : ""
-  }difficulty=${state.formData.difficulty}&type=${state.formData.type}`;
+  }difficulty=${state.formData.difficulty}${
+    state.formData.type !== "any" ? "&type=" + state.formData.type : ""
+  }`;
 
   useEffect(() => {
     // Fetch quiz data from the API
@@ -63,7 +65,7 @@ export default function QuizPage() {
       difficulty: state.formData.difficulty,
     });
     localStorageArr = JSON.stringify(localStorageArr);
-    localStorage.setItem("score", localStorageArr)
+    localStorage.setItem("score", localStorageArr);
   };
 
   // Generate Quiz components using quizData
