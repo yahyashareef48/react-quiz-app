@@ -1,3 +1,10 @@
+import Score from "../components/Score";
+
 export default function ScorePage() {
-  return <h1> this is score page</h1>
+  const localStorageArr = JSON.parse(localStorage.getItem("score"));
+  console.log(localStorageArr);
+
+  const scoreElement = localStorageArr.map((data) => <Score props={data} />);
+
+  return <main>{scoreElement}</main>;
 }

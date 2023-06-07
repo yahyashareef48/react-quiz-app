@@ -53,10 +53,12 @@ export default function QuizPage() {
     // Scroll to the top of the page
     window.scrollTo(0, 0);
 
+    console.log(gameScore);
+
     // localStorage
     let localStorageArr = JSON.parse(localStorage.getItem("score"));
     localStorageArr.push({
-      score: submitState.score,
+      score: gameScore,
       time: new Date(),
       difficulty: state.formData.difficulty,
     });
