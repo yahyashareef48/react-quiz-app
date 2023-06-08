@@ -10,7 +10,7 @@ export default function QuizPage() {
 
   // Define the state variables
   const [quizData, setQuizData] = useState([]); // Holds the quiz data fetched from the API
-  const [ans, setAns] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); // Holds the user's answers
+  const [ans, setAns] = useState([null, null, null, null, null, null, null, null, null, null]); // Holds the user's answers
   const [submitState, setSubmitState] = useState({
     score: 0,
     submitted: false,
@@ -41,6 +41,7 @@ export default function QuizPage() {
 
   // Submit button function
   const handleSubmitBtn = (e) => {
+    console.log(ans);
     e.preventDefault();
     // Calculate the game score based on correct answers
     let gameScore = 0;
@@ -54,8 +55,6 @@ export default function QuizPage() {
     });
     // Scroll to the top of the page
     window.scrollTo(0, 0);
-
-    console.log(gameScore);
 
     // localStorage
     let localStorageArr = JSON.parse(localStorage.getItem("score"));
@@ -80,12 +79,12 @@ export default function QuizPage() {
   ));
 
   return (
-    <>
+    <div className="bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700 min-h-screen">
       {/* Display the score if submitted */}
       {submitState.submitted && <div>{submitState.score}</div>}
 
       {/* Render the Quiz components */}
-      <div className="grid gap-4">{quizData.length !== 0 && quizElements}</div>
+      <div className="grid gap-8 py-8">{quizData.length !== 0 && quizElements}</div>
 
       {/* Submit button */}
       {!submitState.submitted ? (
@@ -93,6 +92,6 @@ export default function QuizPage() {
       ) : (
         <button onClick={() => navigate("/", { replace: true })}>Play Again</button>
       )}
-    </>
+    </div>
   );
 }

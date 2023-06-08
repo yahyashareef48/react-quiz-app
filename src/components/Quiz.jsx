@@ -1,34 +1,58 @@
 import he from "he"; // Import the "he" library for HTML entity decoding
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid"; // Import the uuidv4 function for generating unique keys
 
 export default function Quiz({ props, handleAns, num, submitted }) {
-  let options = [props.correct_answer, ...props.incorrect_answers];
+  const [clicked, setClicked] = useState([false, false, false, false]);
+  const [options, setOptions] = useState([props.correct_answer, ...props.incorrect_answers]);
 
   // Sort options based on the question type
-  options =
-    props.type === "multiple" ? options.sort(() => Math.random() - 0.5) : options.sort().reverse();
+  useEffect(() => {
+    setOptions((oldOptions) => {
+      let sortedOptions = [...oldOptions]; // Make a copy of the oldOptions array
+
+      if (props.type === "multiple") {
+        sortedOptions.sort(() => Math.random() - 0.5);
+      } else {
+        sortedOptions.sort().reverse();
+      }
+
+      return sortedOptions; // Return the sorted options
+    });
+  }, []);
 
   // Generate buttons for each option
-  let btn = options.map((ans) => {
-    let handleClick = (e) => {
+  const btn = options.map((ans, index) => {
+    const handleClick = (e) => {
       e.preventDefault();
-      !submitted && handleAns(num, ans);
+      if (!submitted) {
+        handleAns(num, ans);
+        setClicked((oldState) => oldState.map((x, y) => (x = y === index)));
+      }
     };
 
     return (
-      <button onClick={handleClick} key={uuidv4()}>
+      <button
+        key={uuidv4()}
+        onClick={handleClick}
+        className={`
+        ${clicked[index] ? "text-white bg-gray-600" : "text-gray-600 bg-white"}
+        ${props.correct_answer === ans && submitted && "bg-green-500 border-green-500 text-white"}
+        w-auto rounded-full p-4 font-bold border-solid border-2 border-gray-600 m-4
+        `}
+      >
         {he.decode(ans)}
       </button>
     );
   });
 
   return (
-    <div>
+    <div className="bg-white max-w-md w-full rounded-xl m-auto">
       {/* Render the question */}
-      <h3>{he.decode(props.question)}</h3>
+      <h3 className=" bg-slate-600 rounded-t-xl p-3 text-white">{he.decode(props.question)}</h3>
 
       {/* Render the answer options */}
-      <div className="grid gap-4">{btn}</div>
+      <div className="grid">{btn}</div>
     </div>
   );
 }
