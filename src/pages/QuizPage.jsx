@@ -42,8 +42,13 @@ export default function QuizPage() {
 
   // Submit button function
   const handleSubmitBtn = (e) => {
-    console.log(ans);
     e.preventDefault();
+
+    if(ans.includes(null)) {
+      alert("Please ensure that you answer all the questions.");
+      return
+    }
+
     // Calculate the game score based on correct answers
     let gameScore = 0;
     ans.map((a, i) => {
