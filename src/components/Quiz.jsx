@@ -2,24 +2,8 @@ import he from "he"; // Import the "he" library for HTML entity decoding
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid"; // Import the uuidv4 function for generating unique keys
 
-export default function Quiz({ props, handleAns, num, submitted }) {
+export default function Quiz({ props, handleAns, num, submitted, options }) {
   const [clicked, setClicked] = useState([false, false, false, false]);
-  const [options, setOptions] = useState([props.correct_answer, ...props.incorrect_answers]);
-
-  // Sort options based on the question type
-  useEffect(() => {
-    setOptions((oldOptions) => {
-      let sortedOptions = [...oldOptions]; // Make a copy of the oldOptions array
-
-      if (props.type === "multiple") {
-        sortedOptions.sort(() => Math.random() - 0.5);
-      } else {
-        sortedOptions.sort().reverse();
-      }
-
-      return sortedOptions; // Return the sorted options
-    });
-  }, []);
 
   // Generate buttons for each option
   const btn = options.map((ans, index) => {

@@ -15,6 +15,7 @@ export default function QuizPage() {
     score: 0,
     submitted: false,
   }); // Holds the score and submission state
+  const [quizElements, setQuizElements] = useState([]);
 
   // Construct the URL for API request based on the form data
   const url = `https://opentdb.com/api.php?amount=10&${
@@ -68,15 +69,31 @@ export default function QuizPage() {
   };
 
   // Generate Quiz components using quizData
-  const quizElements = quizData.map((data, index) => (
-    <Quiz
-      key={uuidv4()} // Assign a unique key to each Quiz component
-      props={data}
-      submitted={submitState.submitted}
-      num={index}
-      handleAns={handleAns}
-    />
-  ));
+  useEffect(() => {
+    const mappedQuizElements = quizData.map((data, index) => {
+      let options = [data.correct_answer, ...data.incorrect_answers];
+
+      if (data.type === "multiple") {
+        options.sort(() => Math.random() - 0.5);
+      } else {
+        options.sort().reverse();
+      }
+
+      return (
+        <Quiz
+          key={uuidv4()}
+          props={data}
+          options={options}
+          submitted={submitState.submitted}
+          num={index}
+          handleAns={handleAns}
+        />
+      );
+    });
+
+    setQuizElements(mappedQuizElements);
+    
+  }, [quizData, submitState]);
 
   return (
     <div className="bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700 min-h-screen">
