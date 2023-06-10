@@ -101,9 +101,13 @@ export default function QuizPage() {
   }, [quizData, submitState]);
 
   return (
-    <div className="bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700 min-h-screen">
+    <div className="bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700 min-h-screen p-4">
       {/* Display the score if submitted */}
-      {submitState.submitted && <div>{submitState.score}</div>}
+      {submitState.submitted && (
+        <div className="p-8 shadow-2xl backdrop-blur-sm bg-white/30 max-w-md w-full rounded-xl m-auto grid items-center">
+          <h2 className="text-center text-6xl font-bold">Score: {submitState.score}</h2>
+        </div>
+      )}
 
       {/* Render the Quiz components */}
       <div className="grid gap-8 py-8">{quizData.length !== 0 && quizElements}</div>

@@ -16,7 +16,7 @@ export default function Quiz({ props, handleAns, num, submitted, options }) {
   }, [clicked]);
 
   // Generate buttons for each option
-  const btn = options.map((ans, index) => {
+  const btn = options.map((ans) => {
     const handleClick = (e) => {
       e.preventDefault();
       if (!submitted) {
