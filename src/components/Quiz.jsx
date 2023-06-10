@@ -49,7 +49,14 @@ export default function Quiz({ props, handleAns, num, submitted, options }) {
   return (
     <div className="bg-white max-w-md w-full rounded-xl m-auto">
       {/* Render the question */}
-      <h3 className=" bg-slate-600 rounded-t-xl p-3 text-white">{he.decode(props.question)}</h3>
+      <h3
+        className={`
+        rounded-t-xl p-3 text-white
+        ${!submitted ? "bg-slate-600" : (clicked === props.correct_answer ? "bg-green-500" : "bg-red-500")}
+        `}
+      >
+        {he.decode(props.question)}
+      </h3>
 
       {/* Render the answer options */}
       <div className="grid">{btn}</div>
