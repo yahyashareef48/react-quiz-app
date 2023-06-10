@@ -20,7 +20,7 @@ export default function Quiz({ props, handleAns, num, submitted, options }) {
         key={uuidv4()}
         onClick={handleClick}
         className={`
-        ${clicked[index] ? "text-white bg-gray-600" : "text-gray-600 bg-white"}
+        ${clicked[index] ? "text-white bg-gray-600" : "text-gray-600"}
         ${props.correct_answer === ans && submitted && "bg-green-500 border-green-500 text-white"}
         w-auto rounded-full p-4 font-bold border-solid border-2 border-gray-600 m-4
         `}

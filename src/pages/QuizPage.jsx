@@ -44,9 +44,9 @@ export default function QuizPage() {
   const handleSubmitBtn = (e) => {
     e.preventDefault();
 
-    if(ans.includes(null)) {
+    if (ans.includes(null)) {
       alert("Please ensure that you answer all the questions.");
-      return
+      return;
     }
 
     // Calculate the game score based on correct answers
@@ -97,7 +97,6 @@ export default function QuizPage() {
     });
 
     setQuizElements(mappedQuizElements);
-    
   }, [quizData, submitState]);
 
   return (
