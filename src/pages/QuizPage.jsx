@@ -101,10 +101,10 @@ export default function QuizPage() {
   }, [quizData, submitState]);
 
   return (
-    <div className="bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700 min-h-screen p-4">
+    <div className="bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700 min-h-screen p-4 flex flex-col items-center">
       {/* Display the score if submitted */}
       {submitState.submitted && (
-        <div className="p-8 shadow-2xl backdrop-blur-sm bg-white/30 max-w-md w-full rounded-xl m-auto grid items-center">
+        <div className="p-8 shadow-2xl bg-white/30 max-w-md w-full rounded-xl grid items-center">
           <h2 className="text-center text-6xl font-bold">Score: {submitState.score}</h2>
         </div>
       )}
@@ -114,9 +114,19 @@ export default function QuizPage() {
 
       {/* Submit button */}
       {!submitState.submitted ? (
-        <button onClick={handleSubmitBtn}>Submit</button>
+        <button
+          onClick={handleSubmitBtn}
+          className="max-w-md w-full rounded-xl bg-white/30 p-4 font-bold mb-12 mt-4"
+        >
+          Submit
+        </button>
       ) : (
-        <button onClick={() => navigate("/", { replace: true })}>Play Again</button>
+        <button
+          onClick={() => navigate("/", { replace: true })}
+          className="max-w-md w-full rounded-xl transition-all bg-green-500/70 shadow-2xl hover:bg-green-500/90 p-4 font-bold mb-12 mt-4"
+        >
+          Play Again
+        </button>
       )}
     </div>
   );
