@@ -63,6 +63,7 @@ export default function QuizPage() {
     window.scrollTo(0, 0);
 
     // localStorage
+    (!localStorage.getItem("score") && localStorage.setItem("score", JSON.stringify([])));
     let localStorageArr = JSON.parse(localStorage.getItem("score"));
     localStorageArr.push({
       score: gameScore,
