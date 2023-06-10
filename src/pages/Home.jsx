@@ -72,14 +72,14 @@ export default function Home() {
             </select>
           </div>
 
-          <div>
+          {/* <div>
             <label htmlFor="type">Type</label>
             <select name="type" value={formData.type} onChange={handleChange} className="w-full">
               <option value="any">Random</option>
               <option value="multiple">Multiple Chois</option>
               <option value="boolean">True or False</option>
             </select>
-          </div>
+          </div> */}
 
           <Link to="/quiz" state={{ formData }} className="w-full">
             <button className="p-4 bg-[#00000089] rounded-xl font-bold w-full">
