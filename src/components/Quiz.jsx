@@ -4,17 +4,17 @@ import { v4 as uuidv4 } from "uuid"; // Import the uuidv4 function for generatin
 
 export default function Quiz({ props, handleAns, num, submitted, options }) {
   const [clicked, setClicked] = useState(() =>
-    JSON.parse(localStorage.getItem("clicked"))
-      ? JSON.parse(localStorage.getItem("clicked"))
+    JSON.parse(localStorage.getItem(`clicked ${num}`))
+      ? JSON.parse(localStorage.getItem(`clicked ${num}`))
       : [false, false, false, false]
   );
 
   useEffect(() => {
-    localStorage.setItem("clicked", JSON.stringify(clicked));
+    localStorage.setItem(`clicked ${num}`, JSON.stringify(clicked));
 
     // Cleanup function
     return () => {
-      localStorage.removeItem("clicked");
+      localStorage.removeItem(`clicked ${num}`);
     };
   }, [clicked]);
 
@@ -35,7 +35,7 @@ export default function Quiz({ props, handleAns, num, submitted, options }) {
         className={`
         ${clicked[index] ? "text-white bg-gray-600" : "text-gray-600"}
         ${props.correct_answer === ans && submitted && "bg-green-500 border-green-500 text-white"}
-        ${props.correct_answer !== ans && clicked[index] && "bg-red-500 border-red-500 text-white"}
+        ${props.correct_answer !== ans && clicked[index] && submitted && "bg-red-500 border-red-500 text-white"}
         w-auto rounded-full p-4 font-bold border-solid border-2 border-gray-600 m-4
         `}
       >
