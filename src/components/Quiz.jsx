@@ -3,21 +3,20 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid"; // Import the uuidv4 function for generating unique keys
 
 export default function Quiz({ props, handleAns, num, submitted, options }) {
-    const [clicked, setClicked] = useState(() => (
-        JSON.parse(localStorage.getItem("clicked"))
-          ? JSON.parse(localStorage.getItem("clicked"))
-          : [false, false, false, false]
-    ));
+  const [clicked, setClicked] = useState(() =>
+    JSON.parse(localStorage.getItem("clicked"))
+      ? JSON.parse(localStorage.getItem("clicked"))
+      : [false, false, false, false]
+  );
 
-    useEffect(() => {
-      localStorage.setItem("clicked", JSON.stringify(clicked));
-      console.log(clicked);
+  useEffect(() => {
+    localStorage.setItem("clicked", JSON.stringify(clicked));
 
-      // Cleanup function
-      return () => {
-        localStorage.removeItem("clicked");
-      };
-    }, [clicked]);
+    // Cleanup function
+    return () => {
+      localStorage.removeItem("clicked");
+    };
+  }, [clicked]);
 
   // Generate buttons for each option
   const btn = options.map((ans, index) => {
