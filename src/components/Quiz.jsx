@@ -52,7 +52,13 @@ export default function Quiz({ props, handleAns, num, submitted, options }) {
       <h3
         className={`
         rounded-t-xl p-3 text-white
-        ${!submitted ? "bg-slate-600" : (clicked === props.correct_answer ? "bg-green-500" : "bg-red-500")}
+        ${
+          !submitted
+            ? "bg-slate-600"
+            : clicked === props.correct_answer
+            ? "bg-green-500"
+            : "bg-red-500"
+        }
         `}
       >
         {he.decode(props.question)}
