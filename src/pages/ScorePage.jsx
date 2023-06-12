@@ -8,6 +8,14 @@ export default function ScorePage() {
       <p>Score: {data.score}</p>
       <p>Time & Date: {data.time}</p>
       <p>difficulty: {data.difficulty}</p>
+      <p>
+        type:{" "}
+        {data.type === "any"
+          ? "Random"
+          : data.type === "boolean"
+          ? "True or False"
+          : "Multiple Chois"}
+      </p>
     </div>
   ));
 

@@ -63,12 +63,13 @@ export default function QuizPage() {
     window.scrollTo(0, 0);
 
     // localStorage
-    (!localStorage.getItem("score") && localStorage.setItem("score", JSON.stringify([])));
+    !localStorage.getItem("score") && localStorage.setItem("score", JSON.stringify([]));
     let localStorageArr = JSON.parse(localStorage.getItem("score"));
     localStorageArr.push({
       score: gameScore,
       time: new Date(),
       difficulty: state.formData.difficulty,
+      type: state.formData.type,
     });
     localStorageArr = JSON.stringify(localStorageArr);
     localStorage.setItem("score", localStorageArr);
@@ -116,7 +117,7 @@ export default function QuizPage() {
       {!submitState.submitted ? (
         <button
           onClick={handleSubmitBtn}
-          className="max-w-md w-full rounded-xl bg-white/30 p-4 font-bold mb-12 mt-4"
+          className="max-w-md w-full rounded-xl transition-all bg-white/40 hover:bg-white/60 p-4 font-bold mb-12 mt-4"
         >
           Submit
         </button>
