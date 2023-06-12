@@ -4,20 +4,35 @@ export default function ScorePage() {
   const localStorageArr = JSON.parse(localStorage.getItem("score")).reverse();
 
   const scoreElement = localStorageArr.map((data) => (
-    <div key={uuidv4()}>
-      <p>Score: {data.score}</p>
-      <p>Time & Date: {data.time}</p>
-      <p>difficulty: {data.difficulty}</p>
-      <p>
+    <div
+      key={uuidv4()}
+      className="p-6 shadow-2xl bg-white/60 max-w-md w-full rounded-xl grid gap-2 items-center"
+    >
+      <p className="font-bold text-base">
+        Score: <span className="font-normal">{data.score}</span>
+      </p>
+      <p className="font-bold text-base">
+        Date: <span className="font-normal">{data.time.split("T")[0].replace(/-/g, "/")}</span>
+      </p>
+      <p className="font-bold text-base">
+        difficulty: <span className="font-normal">{data.difficulty}</span>
+      </p>
+      <p className="font-bold text-base">
         type:{" "}
-        {data.type === "any"
-          ? "Random"
-          : data.type === "boolean"
-          ? "True or False"
-          : "Multiple Chois"}
+        <span className="font-normal">
+          {data.type === "any"
+            ? "Random"
+            : data.type === "boolean"
+            ? "True or False"
+            : "Multiple Chois"}
+        </span>
       </p>
     </div>
   ));
 
-  return <main>{scoreElement}</main>;
+  return (
+    <main className="min-h-screen grid gap-8 p-4 place-items-center bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700">
+      {scoreElement}
+    </main>
+  );
 }
