@@ -10,7 +10,7 @@ export default function QuizPage() {
 
   // Define the state variables
   const [quizData, setQuizData] = useState([]); // Holds the quiz data fetched from the API
-  const [ans, setAns] = useState([null, null, null, null, null, null, null, null, null, null]); // Holds the user's answers
+  const [ans, setAns] = useState(new Array(10).fill(null)); // Holds the user's answers
   const [submitState, setSubmitState] = useState({
     score: 0,
     submitted: false,
@@ -51,7 +51,7 @@ export default function QuizPage() {
 
     // Calculate the game score based on correct answers
     let gameScore = 0;
-    ans.map((a, i) => {
+    ans.forEach((a, i) => {
       quizData[i].correct_answer === a && gameScore++;
     });
     // Update the submission state and score
@@ -64,15 +64,15 @@ export default function QuizPage() {
 
     // localStorage
     !localStorage.getItem("score") && localStorage.setItem("score", JSON.stringify([]));
-    let localStorageArr = JSON.parse(localStorage.getItem("score"));
-    localStorageArr.push({
+    let scoreList = JSON.parse(localStorage.getItem("score"));
+    scoreList.push({
       score: gameScore,
       time: new Date(),
       difficulty: state.formData.difficulty,
       type: state.formData.type,
     });
-    localStorageArr = JSON.stringify(localStorageArr);
-    localStorage.setItem("score", localStorageArr);
+    scoreList = JSON.stringify(scoreList);
+    localStorage.setItem("score", scoreList);
   };
 
   // Generate Quiz components using quizData
