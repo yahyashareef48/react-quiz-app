@@ -19,6 +19,7 @@ export default function Home() {
           </button>
         </Link>
       </div>
+      <p className="text-center mt-auto">© 2023 Yahya Shareef. All rights reserved.</p>
     </main>
   );
 }

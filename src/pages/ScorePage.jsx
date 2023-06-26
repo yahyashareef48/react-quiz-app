@@ -34,7 +34,12 @@ export default function ScorePage() {
 
   return (
     <main className="min-h-screen grid gap-8 p-4 place-items-center bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700">
-      {localStorageArr ? scoreElement.reverse() : <h1 className="text-xl font-bold tracking-wide">Scoreboard is empty</h1>}
+      {localStorageArr ? (
+        scoreElement.reverse()
+      ) : (
+        <h1 className="text-xl font-bold tracking-wide">Scoreboard is empty</h1>
+      )}
+      <p className="text-center">© 2023 Yahya Shareef. All rights reserved.</p>
     </main>
   );
 }

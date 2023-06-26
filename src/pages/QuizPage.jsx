@@ -129,6 +129,7 @@ export default function QuizPage() {
           Play Again
         </button>
       )}
+      <p className="text-center">© 2023 Yahya Shareef. All rights reserved.</p>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function StartPage() {
   };
 
   return (
-    <main className=" min-h-screen grid place-items-center bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700">
+    <main className=" min-h-screen grid place-items-center bg-gradient-to-tr from-blue-700 via-purple-700 to-orange-700 p-4">
       <form action="/" className="grid grid-rows-1 max-w-xs gap-4">
         <div>
           <select
@@ -89,6 +89,7 @@ export default function StartPage() {
           </button>
         </Link>
       </form>
+      <p className="text-center my-auto">© 2023 Yahya Shareef. All rights reserved.</p>
     </main>
   );
 }
